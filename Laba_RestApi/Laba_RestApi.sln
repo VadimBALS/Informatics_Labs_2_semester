@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba_RestApi", "Laba_RestApi\Laba_RestApi.csproj", "{3A05B0DE-EDE2-4B70-B89A-BF8AA5FD131F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A05B0DE-EDE2-4B70-B89A-BF8AA5FD131F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A05B0DE-EDE2-4B70-B89A-BF8AA5FD131F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A05B0DE-EDE2-4B70-B89A-BF8AA5FD131F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A05B0DE-EDE2-4B70-B89A-BF8AA5FD131F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10EF5CE8-A087-477E-BE2A-454D7167B6C9}
+	EndGlobalSection
+EndGlobal
