@@ -5,8 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba_Timer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="500" Width="800">
+    <Grid x:Name="save_list">
+        <Grid.Background>
+            <ImageBrush ImageSource="/AdTime.jpg" TileMode="None" Opacity="1"/>
+        </Grid.Background>
+        <Button Content="Add Timer" HorizontalAlignment="Left" Margin="29,200,0,0" VerticalAlignment="Top" Height="24" Width="125" Click="Button_Click_add_timer"/>
+        <ComboBox x:Name="month" HorizontalAlignment="Left" Height="25" Margin="181,97,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="month_SelectionChanged"/>
+        <ComboBox x:Name="day" HorizontalAlignment="Left" Height="25" Margin="329,97,0,0" VerticalAlignment="Top" Width="125" IsEnabled="False" SelectionChanged="day_SelectionChanged"/>
+        <ComboBox x:Name="year" HorizontalAlignment="Left" Height="25" Margin="29,97,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="year_SelectionChanged"/>
+        <Label Content="Laba Timer" HorizontalAlignment="Center" Height="35" Margin="0,21,0,0" VerticalAlignment="Top" Width="142" Background="{x:Null}" FontSize="24" FontFamily="Sitka Text"/>
+        <Label x:Name="res" Content="" HorizontalAlignment="Left" Height="37" Margin="32,122,0,0" VerticalAlignment="Top" Width="331" FontSize="16"/>
+        <Label x:Name="lb" Content="" HorizontalAlignment="Left" Height="35" Margin="32,362,0,0" VerticalAlignment="Top" Width="328" FontSize="16"/>
+        <ListBox x:Name="tm_lst" HorizontalAlignment="Left" Height="109" Margin="29,239,0,0" VerticalAlignment="Top" Width="182" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="tm_lst_SelectionChanged"/>
+        <Label x:Name="bfr_td" Content="" HorizontalAlignment="Left" Height="35" Margin="32,410,0,0" VerticalAlignment="Top" Width="699" FontSize="16"/>
+        <Label Content="Year" HorizontalAlignment="Left" Height="35" Margin="32,66,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" FontSize="16" FontFamily="Sitka Text"/>
+        <Label Content="Month" HorizontalAlignment="Left" Height="35" Margin="184,66,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" FontSize="16" FontFamily="Sitka Text"/>
+        <Label Content="Day" HorizontalAlignment="Left" Height="35" Margin="329,66,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" FontSize="16" FontFamily="Sitka Text"/>
+        <ComboBox x:Name="ft" HorizontalAlignment="Left" Height="29" Margin="226,242,0,0" VerticalAlignment="Top" Width="130" IsEnabled="False" IsSynchronizedWithCurrentItem="True" SelectionChanged="ft_SelectionChanged"/>
+        <Label Content="Formats" HorizontalAlignment="Left" Height="25" Margin="226,212,0,0" VerticalAlignment="Top" Width="122" Background="{x:Null}" FontSize="16" FontFamily="Sitka Text"/>
+        <Button Content="Save list" HorizontalAlignment="Left" Height="25" Margin="226,281,0,0" VerticalAlignment="Top" Width="130" Click="Button_Click_save_list"/>
+
     </Grid>
 </Window>
