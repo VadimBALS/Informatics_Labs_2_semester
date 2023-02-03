@@ -1,0 +1,21 @@
+﻿<Window x:Class="Laba2.Wnd_2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laba2"
+        mc:Ignorable="d"
+        Title="Wnd2" Height="250" Width="500">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="Red" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBox x:Name="tb" HorizontalAlignment="Left" Height="24" Margin="25,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
+        <Button x:Name="add_s" Content="Add string" HorizontalAlignment="Left" Height="25" Margin="25,117,0,0" VerticalAlignment="Top" Width="116" Click="add_s_Click"/>
+        <Label x:Name="res" Content="" HorizontalAlignment="Left" Height="95" Margin="213,77,0,0" VerticalAlignment="Top" Width="230" Foreground="White"/>
+
+    </Grid>
+</Window>

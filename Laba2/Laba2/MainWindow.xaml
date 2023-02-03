@@ -1,0 +1,30 @@
+﻿<Window x:Class="Laba2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laba2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="/tlou.jpeg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
+        <Button x:Name="tsk_1" Content="Start" HorizontalAlignment="Left" Height="34" Margin="81,143,0,0" VerticalAlignment="Top" Width="141" Click="tsk_1_Click"/>
+        <Label Content="Task 1" HorizontalAlignment="Left" Height="34" Margin="80,104,0,0" VerticalAlignment="Top" Width="142" FontSize="20" Foreground="White"/>
+        <Label Content="Laba 2" HorizontalAlignment="Center" Height="40" Margin="0,10,0,0" VerticalAlignment="Top" Width="80" FontSize="22" Foreground="White" FontWeight="Bold"/>
+        <Label Content="Task 2" HorizontalAlignment="Center" Height="34" Margin="0,104,0,0" VerticalAlignment="Top" Width="140" FontSize="20" Foreground="White"/>
+        <Label Content="Task 3" HorizontalAlignment="Left" Height="34" Margin="573,104,0,0" VerticalAlignment="Top" Width="142" FontSize="20" Foreground="White"/>
+        <Button x:Name="tsk_2" Content="Start" HorizontalAlignment="Center" Height="34" Margin="0,143,0,0" VerticalAlignment="Top" Width="141" Click="tsk_2_Click"/>
+        <Button x:Name="tsk_3" Content="Start" HorizontalAlignment="Left" Height="34" Margin="573,143,0,0" VerticalAlignment="Top" Width="141" Click="tsk_3_Click"/>
+        <Label Content="Task 4" HorizontalAlignment="Left" Height="34" Margin="81,241,0,0" VerticalAlignment="Top" Width="142" FontSize="20" Foreground="White"/>
+        <Label Content="Task 5" HorizontalAlignment="Center" Height="34" Margin="0,241,0,0" VerticalAlignment="Top" Width="142" FontSize="20" Foreground="White"/>
+        <Label Content="Task 6" HorizontalAlignment="Left" Height="34" Margin="573,241,0,0" VerticalAlignment="Top" Width="142" FontSize="20" Foreground="White"/>
+        <Button x:Name="tsk_4" Content="Start" HorizontalAlignment="Left" Height="34" Margin="80,280,0,0" VerticalAlignment="Top" Width="141" Click="tsk_4_Click"/>
+        <Button x:Name="tsk_5" Content="Start" HorizontalAlignment="Center" Height="34" Margin="0,280,0,0" VerticalAlignment="Top" Width="141" Click="tsk_5_Click"/>
+        <Button x:Name="tsk_6" Content="Start" HorizontalAlignment="Left" Height="34" Margin="573,280,0,0" VerticalAlignment="Top" Width="141" Click="tsk_6_Click"/>
+    </Grid>
+</Window>
