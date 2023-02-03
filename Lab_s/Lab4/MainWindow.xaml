@@ -1,0 +1,19 @@
+﻿<Window x:Class="Lab4.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab4"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="506.05" Width="673.2">
+    <Grid>
+        <UniformGrid Name="Uniform" Rows="5" Columns="5" Margin="324,72,10,67"/>
+        <Button Name="Start" Content="Старт" HorizontalAlignment="Left" Margin="21,125,0,0" VerticalAlignment="Top" Width="121" Height="62" Click="Start_Click"/>
+        <TextBox Name="CountMinesTxt" HorizontalAlignment="Left" Height="23" Margin="21,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Введите количество мин" HorizontalAlignment="Left" Margin="21,94,0,0" VerticalAlignment="Top"/>
+        <Label Name="RealCount" Content="Количество созданных мин" HorizontalAlignment="Left" Margin="21,251,0,0" VerticalAlignment="Top"/>
+        <TextBox Name="Size" HorizontalAlignment="Left" Height="23" Margin="21,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="Size_TextChanged"/>
+        <Label Content="Введите размер поля" HorizontalAlignment="Left" Margin="21,38,0,0" VerticalAlignment="Top"/>
+        
+    </Grid>
+</Window>
