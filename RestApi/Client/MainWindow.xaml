@@ -1,0 +1,27 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="550">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0.2"/>
+                <GradientStop Color="#FF118796" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Content="Client" HorizontalAlignment="Left" Height="69" Margin="169,22,0,0" VerticalAlignment="Top" Width="100" Foreground="White" FontSize="36"/>
+        <ListBox x:Name="log" Height="230" Margin="303,104,40,0" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+        <TextBox x:Name="msg" HorizontalAlignment="Left" Height="32" Margin="32,236,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="254" FontSize="16"/>
+        <Button x:Name="send" Content="Send" HorizontalAlignment="Left" Height="36" Margin="32,273,0,0" VerticalAlignment="Top" Width="100" FontSize="18" Click="send_Click"/>
+        <Button x:Name="connect_to_server" Content="Connect to server" HorizontalAlignment="Left" Height="36" Margin="32,151,0,0" VerticalAlignment="Top" Width="151" FontSize="16" Click="connect_to_server_Click"/>
+        <Label Content="Chat" HorizontalAlignment="Left" Height="40" Margin="378,54,0,0" VerticalAlignment="Top" Width="58" FontSize="24" Foreground="White"/>
+        <TextBox x:Name="uName" HorizontalAlignment="Left" Height="32" Margin="32,114,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" FontSize="16"/>
+        <Label Content="Your Name" HorizontalAlignment="Left" Height="29" Margin="32,80,0,0" VerticalAlignment="Top" Width="132" FontSize="18" Foreground="White"/>
+        <Label Content="Your message" HorizontalAlignment="Left" Height="34" Margin="32,202,0,0" VerticalAlignment="Top" Width="132" FontSize="18" Foreground="White"/>
+
+    </Grid>
+</Window>
