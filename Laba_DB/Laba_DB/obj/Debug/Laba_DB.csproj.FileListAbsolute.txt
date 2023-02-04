@@ -25,3 +25,5 @@ C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Lab
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Laba_DB.pdb
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Wnd_1.g.cs
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Wnd_1.baml
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Wnd_2.g.cs
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_DB\Laba_DB\obj\Debug\Wnd_2.baml

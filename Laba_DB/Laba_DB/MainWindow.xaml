@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba_DB"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
+        Title="MainWindow" Height="450" Width="750" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,18 +13,36 @@
                 <GradientStop Color="#FFB50063" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Content="Show Data " HorizontalAlignment="Left" Height="37" Margin="212,329,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_show_data"/>
-        <DataGrid x:Name="data" HorizontalAlignment="Left" Height="255" Margin="47,52,0,0" VerticalAlignment="Top" Width="267">
+        <Button Content="Show Data " HorizontalAlignment="Left" Height="38" Margin="195,295,0,0" VerticalAlignment="Top" Width="102" Click="Button_Click_show_data"/>
+        <DataGrid x:Name="data" HorizontalAlignment="Left" Height="121" Margin="30,131,0,0" VerticalAlignment="Top" Width="267">
             <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding uid}" Header="Uid"/>
                 <DataGridTextColumn Binding="{Binding fio}" Header="FIO" />
                 <DataGridTextColumn Binding="{Binding math}" Header="Math"/>
                 <DataGridTextColumn Binding="{Binding phys}" Header="Phys"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Add Student" HorizontalAlignment="Left" Height="31" Margin="353,52,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_add_student"/>
-        <Button x:Name="start_db_con" Content="Start DB Connection" HorizontalAlignment="Left" Height="37" Margin="47,329,0,0" VerticalAlignment="Top" Width="133" Click="Button_Click_start_db_con"/>
-        <Label x:Name="lb" Content="" HorizontalAlignment="Left" Height="52" Margin="365,128,0,0" VerticalAlignment="Top" Width="153" FontSize="16" Foreground="White"/>
-        <Button Content="Delete Student" HorizontalAlignment="Left" Height="31" Margin="353,108,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_delete_student"/>
-
+        <Button Content="Add Student" HorizontalAlignment="Left" Height="38" Margin="490,295,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_add_student"/>
+        <Button x:Name="start_db_con" Content="Start DB Connection" HorizontalAlignment="Left" Height="38" Margin="30,295,0,0" VerticalAlignment="Top" Width="133" Click="Button_Click_start_db_con"/>
+        <Label x:Name="lb" Content="" HorizontalAlignment="Left" Height="34" Margin="30,256,0,0" VerticalAlignment="Top" Width="680" FontSize="16" Foreground="White"/>
+        <Button Content="Delete Student" HorizontalAlignment="Left" Height="38" Margin="328,295,0,0" VerticalAlignment="Top" Width="126" Click="Button_Click_delete_student"/>
+        <DataGrid x:Name="data_stud" HorizontalAlignment="Left" Height="122" Margin="328,131,0,0" VerticalAlignment="Top" Width="169">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding uid}" Header="Uid"/>
+                <DataGridTextColumn Binding="{Binding fio}" Header="FIO" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="data_grad" HorizontalAlignment="Left" Height="121" Margin="531,131,0,0" VerticalAlignment="Top" Width="169">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding uid}" Header="Uid"/>
+                <DataGridTextColumn Binding="{Binding math}" Header="Math"/>
+                <DataGridTextColumn Binding="{Binding phys}" Header="Phys"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Students" HorizontalAlignment="Left" Height="30" Margin="30,96,0,0" VerticalAlignment="Top" Width="133" Foreground="White" FontSize="16"/>
+        <Label Content="Table Students" HorizontalAlignment="Left" Height="30" Margin="328,96,0,0" VerticalAlignment="Top" Width="133" Foreground="White" FontSize="16" RenderTransformOrigin="0.466,0.501"/>
+        <Label Content="Table Grades" HorizontalAlignment="Left" Height="30" Margin="531,96,0,0" VerticalAlignment="Top" Width="133" Foreground="White" FontSize="16"/>
+        <Label x:Name="Laba_DB" Content="Laba DB" HorizontalAlignment="Left" Height="48" Margin="319,30,0,0" VerticalAlignment="Top" Width="102" Foreground="White" FontSize="24"/>
+        <Button x:Name="edit_entry" Content="Edit Entry" HorizontalAlignment="Left" Height="38" Margin="30,354,0,0" VerticalAlignment="Top" Width="133" Click="edit_entry_Click"/>
     </Grid>
 </Window>

@@ -1,0 +1,26 @@
+﻿<Window x:Class="Laba_DB.Wnd_2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laba_DB"
+        mc:Ignorable="d"
+        Title="Wnd_2" Height="350" Width="400">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF820090" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBox x:Name="name" HorizontalAlignment="Left" Height="34" Margin="29,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+        <Label Content="Fill in new Name" HorizontalAlignment="Left" Height="29" Margin="29,31,0,0" VerticalAlignment="Top" Width="211" Foreground="White" FontSize="16"/>
+        <Label Content="Fill in new Math gradue" HorizontalAlignment="Left" Height="29" Margin="29,130,0,0" VerticalAlignment="Top" Width="211" Foreground="White" FontSize="16"/>
+        <Label Content="Fill in new Phys gradue" HorizontalAlignment="Left" Height="29" Margin="29,223,0,0" VerticalAlignment="Top" Width="211" Foreground="White" FontSize="16"/>
+        <TextBox x:Name="g_math" HorizontalAlignment="Left" Height="34" Margin="29,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+        <TextBox x:Name="g_phys" HorizontalAlignment="Left" Height="34" Margin="29,252,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182"/>
+        <Button x:Name="ok" Content="OK" HorizontalAlignment="Left" Height="31" Margin="261,110,0,0" VerticalAlignment="Top" Width="89" Click="ok_Click"/>
+        <Button x:Name="cncl" Content="Cancel" HorizontalAlignment="Left" Height="31" Margin="261,203,0,0" VerticalAlignment="Top" Width="89" Click="cncl_Click"/>
+
+    </Grid>
+</Window>
