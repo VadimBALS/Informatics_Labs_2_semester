@@ -108,7 +108,6 @@ namespace Client
             catch (Exception ex)
             {
                 //вывести сообщение об ошибке
-                //log.Items.Add(ex.Message);
                 Dispatcher.BeginInvoke(new Action(() => log.Items.Add(ex.Message)));
             }
             finally
@@ -123,15 +122,24 @@ namespace Client
         {
             //получение сообщения
             string message = msg.Text;
+
+            // очистка поля сообщения 
+            msg.Text = "";
             
             //добавление имени пользователя к сообщению
             message = String.Format("{0}: {1}", username, message);
             
-            //преобразование сообщение в массив байтов
+            //преобразование сообщение в массив байтов 
             byte[] data = Encoding.Unicode.GetBytes(message);
             
             //отправка сообщения
             stream.Write(data, 0, data.Length);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            stream.Close();
+            client.Close();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Server"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -16,6 +16,7 @@
         <ListBox x:Name="log" HorizontalAlignment="Left" Height="256" Margin="177,105,0,0" VerticalAlignment="Top" Width="561" d:ItemsSource="{d:SampleData ItemCount=5}"/>
         <Label Content="Server" HorizontalAlignment="Center" Height="69" Margin="0,31,0,0" VerticalAlignment="Top" Width="114" Foreground="White" FontSize="36"/>
         <Button x:Name="stert_server" Content="Start Server" HorizontalAlignment="Left" Height="36" Margin="25,105,0,0" VerticalAlignment="Top" Width="119" Click="stert_server_Click"/>
+        <Button x:Name="stop_server" Content="Stop Server" HorizontalAlignment="Left" Height="36" Margin="25,166,0,0" VerticalAlignment="Top" Width="119" Click="stop_server_Click"/>
 
     </Grid>
 </Window>

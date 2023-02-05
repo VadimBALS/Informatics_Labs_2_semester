@@ -35,13 +35,12 @@ using System.Windows.Shapes;
     серверу.
 */
 
-
-
-
 //подключение библиотек для работы с сетью и потоками
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Net.Mail;
+using System.Windows.Markup;
 
 namespace Server
 {
@@ -51,6 +50,16 @@ namespace Server
         int port = 8888;
         //объект, прослушивающий порт
         static TcpListener listener;
+
+        // структура описывающая пользователя 
+        struct SClient
+        {
+            public TcpClient client;
+            public NetworkStream stream;
+        }
+
+        // лист всех пользователей 
+        List <SClient> list = new List<SClient>();
 
         public MainWindow()
         {
@@ -95,14 +104,23 @@ namespace Server
         //обработка сообщений от клиента
         public void Process(TcpClient tcpClient)
         {
-            TcpClient client = tcpClient;
-            NetworkStream stream = null; //получение канала связи с клиентом
+            //TcpClient client = tcpClient;
+            //NetworkStream stream = null; //получение канала связи с клиентом
+
+            // создание клиента 
+            SClient client = new SClient();
+            
+            // присвоение TCP слиента 
+            client.client = tcpClient;
 
             try //означает что в случае возникновении ошибки, управление перейдёт к блоку catch
             {
-                //получение потока для обмена сообщениями
-                stream = client.GetStream(); //получение канала связи с клиентом
-                                             // буфер для получаемых данных
+                //создание потока для обмена сообщениями
+                client.stream = client.client.GetStream(); //получение канала связи с клиентом
+                                                           // буфер для получаемых данных
+
+                // добавление клиента в список клиентов 
+                list.Add(client);
 
                 Dispatcher.BeginInvoke(new Action(() => log.Items.Add("Новый клиент подключен.")));
                 
@@ -120,12 +138,12 @@ namespace Server
                     do
                     {
                         //из потока считываются 64 байта и записываются в data начиная с 0
-                        bytes = stream.Read(data, 0, data.Length);
+                        bytes = client.stream.Read(data, 0, data.Length);
 
                         //из считанных данных формируется строка
                         builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
                     }
-                    while (stream.DataAvailable);
+                    while (client.stream.DataAvailable);
 
                     //преобразование сообщения
                     string message = builder.ToString();
@@ -137,9 +155,22 @@ namespace Server
 
                     //преобразование сообщения в набор байт
                     data = Encoding.Unicode.GetBytes(message);
+                    
+                    //отправка сообщения всем клиентам
+                    foreach (SClient sc in list)
+                        sc.stream.Write(data, 0, data.Length);
 
-                    //отправка сообщения обратно клиенту
-                    stream.Write(data, 0, data.Length);
+
+                    // разворот сообщения 
+                    string revers_msg = "";
+                    for (int i = (message).Length-1; i >= 0; i--)
+                        revers_msg += message[i];
+
+                    //преобразование сообщения в набор байт
+                    data = Encoding.Unicode.GetBytes(revers_msg);
+
+                    // отправка обратно клиенту развёрнутого сообщения
+                    client.stream.Write(data, 0, data.Length);
                 }
             }
             catch (Exception ex) //если возникла ошибка, вывести сообщение об ошибке
@@ -149,11 +180,36 @@ namespace Server
             finally //после выхода из бесконечного цикла
             {
                 //освобождение ресурсов при завершении сеанса
-                if (stream != null)
-                    stream.Close();
+                if (client.stream != null)
+                    client.stream.Close();
 
-                if (client != null)
-                    client.Close();
+                if (client.client != null)
+                    client.client.Close();
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            foreach (SClient sc in list)
+            {
+                if (sc.stream != null)
+                    sc.stream.Close();
+                if (sc.client != null)
+                    sc.client.Close();
+            }
+            listener.Stop();
+        }
+
+        private void stop_server_Click(object sender, RoutedEventArgs e)
+        {
+            listener.Stop();
+
+            foreach (SClient sc in list)
+            {
+                if (sc.stream != null)
+                    sc.stream.Close();
+                if (sc.client != null)
+                    sc.client.Close();
             }
         }
     } 
