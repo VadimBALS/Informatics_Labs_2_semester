@@ -16,24 +16,157 @@ using System.Windows.Shapes;
 /*
 Необходимо разработать и реализовать программу “Mp3 Player” на основе класса MediaPlayer. Программа должна содержать следующий функционал:
 
-    1 Выбор нескольких аудио файлов в формате mp3.
-    2 Отображение названий выбранных файлов в компоненте ListBox.
-    3 Выбор и воспроизведение файла из компонента ListBox.
-    4 Последовательное воспроизведение файлов из компонента ListBox.
-    5 Воспроизведение файлов из компонента ListBox в случайном порядке.
-    6 Возможность остановить, запустить и поставить на паузу текущий воспроизводимый файл.
-    7 Возможность перейти к произвольному моменту воспроизводимого файла при помощи компонента Slider.
-    8 Отображение общей длительности воспроизводимого файла и текущего времени воспроизведения.
-    9 Возможность регулирования громкости воспроизведения.
+    1 Выбор нескольких аудио файлов в формате mp3.                      1 YES
+    2 Отображение названий выбранных файлов в компоненте ListBox.       2 YES
+    3 Выбор и воспроизведение файла из компонента ListBox.              3 YES
+    4 Последовательное воспроизведение файлов из компонента ListBox.    4 
+    5 Воспроизведение файлов из компонента ListBox в случайном порядке. 5 NO
+    6 Возможность остановить, запустить и поставить на                  6 YES
+      паузу текущий воспроизводимый файл.
+    7 Возможность перейти к произвольному моменту воспроизводимого      7 YES
+      файла при помощи компонента Slider.
+    8 Отображение общей длительности воспроизводимого файла и           8 YES
+      текущего времени воспроизведения.
+    9 Возможность регулирования громкости воспроизведения.              9 YES
 */
+
+//подключение пространства имён
+using System.Media;
+using Microsoft.Win32;
+using System.Windows.Threading;
+using System.Windows.Controls.Primitives;
 
 namespace Mp3_Player
 {
     public partial class MainWindow : Window
     {
+        //создание объекта, обычно глобального
+        MediaPlayer player = new MediaPlayer();
+        
+        // создание таймера для отслеживания произведения трека 
+        DispatcherTimer dt = new DispatcherTimer();
+
+        // для определения обновления трека при перетаскивании 
+        bool uptd = false;
+
+        // словарь для хранения имени трека и пути к нему
+        Dictionary<string, string> plist= new Dictionary<string, string>();
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // установка громкости 
+            player.Volume = volume.Value;
+
+            // привязка реакции на запуск трека  
+            player.MediaOpened += Player_MediaOpened;
+
+            // привязка реакции на окончание трека 
+            player.MediaEnded += Player_MediaEnded;
+
+            // определение интервала таймера в 1 секунду 
+            dt.Interval = new TimeSpan(0,0,1);
+
+            // привязка метода вызываемого раз в секунду для отслеживания момента трека 
+            dt.Tick += Dt_Tick;
+        }
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            // автообновление позиции ползунка 
+            if (uptd == false)
+                progress_bar.Value = player.Position.Ticks ;
+
+            // на какой щас секунде 
+            now_moment.Content = player.Position.ToString().Substring(0, 8);
+
+        }
+
+        private void load_Click(object sender, RoutedEventArgs e)
+        {
+            //выбор медиа файлoв
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;
+            dlg.ShowDialog();
+
+            //загрузка всех выбранных файлов в словарь и листбокс  
+            foreach (string filename in dlg.FileNames)
+            {
+                plist.Add(System.IO.Path.GetFileName(filename), filename);
+                playlist.Items.Add(System.IO.Path.GetFileName(filename));
+            }
+        }
+
+        private void Player_MediaEnded(object sender, EventArgs e)
+        {
+            // остановка таймера 
+            dt.Stop();
+
+
+        }
+
+        private void Player_MediaOpened(object sender, EventArgs e)
+        {
+            progress_bar.Maximum = player.NaturalDuration.TimeSpan.Ticks;
+        }
+
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+            // установка времени скока всего идёт трек
+            dur.Content = player.NaturalDuration.TimeSpan.ToString().Substring(0, 8);
+
+            // вывод имени трека 
+            tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
+
+            // воспроизведение
+            player.Play();
+
+            // запуск таймера 
+            dt.Start();
+        }
+
+        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            // громкость звука = значению громкости
+            player.Volume = volume.Value;
+        }
+
+        private void pause_Click(object sender, RoutedEventArgs e)
+        {
+            // остановка воспроизведения 
+            player.Pause();
+
+            //остановка тймера
+            dt.Stop();
+        }
+
+        private void progress_bar_ValueChanged(object sender, DragCompletedEventArgs e)
+        {
+            // изменение момента трека ручками 
+            player.Position = new TimeSpan((long)progress_bar.Value);
+
+            // разблокировка автообновления похиции ползунка 
+            uptd = false;
+        }
+
+        private void progress_bar_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            // блокировка автообновления позиции ползунка 
+            // на время перетаскивания 
+            uptd = true;
+        }
+
+        private void playlist_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //загрузка выбранного файла
+            if (playlist.SelectedIndex > -1) 
+            { 
+                player.Open(new Uri(plist[playlist.SelectedItem.ToString()], UriKind.Relative));
+            }
+
+            // обнуление общей продолжительности трека 
+            dur.Content = "";
         }
     }
 }

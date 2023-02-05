@@ -6,7 +6,51 @@
         xmlns:local="clr-namespace:Mp3_Player"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Window.Background>
+        <ImageBrush ImageSource="/wallp.jpg"/>
+    </Window.Background>
+    <Grid x:Name="progress_bar2">
+        <Button x:Name="load" Content="" HorizontalAlignment="Left" Margin="28,256,0,0" VerticalAlignment="Top" Height="50" Width="50" Background="Black" Click="load_Click" BorderBrush="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/download.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <ListBox x:Name="playlist" HorizontalAlignment="Left" Height="154" Margin="28,84,0,0" VerticalAlignment="Top" Width="230" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="playlist_SelectionChanged"/>
+        <Label Content="Laba MP3 Player" HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="212" FontSize="27"/>
+        <Button x:Name="play" Content="" HorizontalAlignment="Left" Margin="28,341,0,0" VerticalAlignment="Top" Height="50" Width="50" Background="Black" Click="play_Click" BorderBrush="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/play.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Label Content="PlayList" HorizontalAlignment="Left" Height="40" Margin="98,44,0,0" VerticalAlignment="Top" Width="90" FontSize="22"/>
+        <Slider x:Name="volume" HorizontalAlignment="Left" Height="18" Margin="219,151,0,0" VerticalAlignment="Top" Width="154" RenderTransformOrigin="0.5,0.5" Foreground="#FF190B0B" LargeChange="0.01" Maximum="1" Value="0.2" ValueChanged="volume_ValueChanged">
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Label Content="Volume" HorizontalAlignment="Left" Height="28" Margin="299,105,0,0" VerticalAlignment="Top" Width="64" FontSize="16" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Button x:Name="pause" Content="" HorizontalAlignment="Left" Margin="98,341,0,0" VerticalAlignment="Top" Height="50" Width="50" Background="Black" Click="pause_Click" BorderBrush="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/pause.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Slider x:Name="progress_bar" HorizontalAlignment="Left" Height="16" Margin="167,358,0,0" VerticalAlignment="Top" Width="309" Background="#FF614A38" Thumb.DragStarted="progress_bar_DragStarted" Thumb.DragCompleted="progress_bar_ValueChanged"/>
+        <Label x:Name="now_moment" Content="" HorizontalAlignment="Left" Height="28" Margin="153,335,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="dur" Content="" HorizontalAlignment="Left" Height="28" Margin="422,335,0,0" VerticalAlignment="Top" Width="76"/>
+        <Label x:Name="tr_name" Content="" HorizontalAlignment="Left" Height="35" Margin="167,309,0,0" VerticalAlignment="Top" Width="309" FontSize="16"/>
     </Grid>
 </Window>
