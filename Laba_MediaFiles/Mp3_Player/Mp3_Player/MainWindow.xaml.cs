@@ -103,12 +103,28 @@ namespace Mp3_Player
             // остановка таймера 
             dt.Stop();
 
+            // след трек или первый  
+            playlist.SelectedIndex = (playlist.SelectedIndex + 1) % playlist.Items.Count;
 
+            // воспроизведение
+            player.Play();
+
+            // запуск таймера 
+            dt.Start();
         }
 
         private void Player_MediaOpened(object sender, EventArgs e)
         {
+            // установка максимума ползунка 
             progress_bar.Maximum = player.NaturalDuration.TimeSpan.Ticks;
+
+            // установка времени скока всего идёт трек
+            dur.Content = player.NaturalDuration.TimeSpan.ToString().Substring(0, 8);
+
+            // вывод имени трека 
+            tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
+
+            now_moment.Content = "00:00:00";
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
@@ -165,8 +181,29 @@ namespace Mp3_Player
                 player.Open(new Uri(plist[playlist.SelectedItem.ToString()], UriKind.Relative));
             }
 
+            // обнуление имени  трека
+            tr_name.Content = "";
+
             // обнуление общей продолжительности трека 
             dur.Content = "";
+
+            // обнуление момента 
+            now_moment.Content = "";
+        }
+
+        private void next_Click(object sender, RoutedEventArgs e)
+        {
+            // след трек или первый  
+            playlist.SelectedIndex = (playlist.SelectedIndex + 1) % playlist.Items.Count;
+
+            // вывод имени трека 
+            tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
+
+            // воспроизведение
+            player.Play();
+
+            // запуск таймера 
+            dt.Start();
         }
     }
 }
