@@ -67,5 +67,12 @@ namespace Mp3_Player.Properties
                 resourceCulture = value;
             }
         }
+        public static System.IO.UnmanagedMemoryStream BAKA
+        {
+            get
+            {
+                return ResourceManager.GetStream("BAKA", resourceCulture);
+            }
+        }
     }
 }

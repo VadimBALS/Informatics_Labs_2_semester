@@ -57,5 +57,21 @@
                 <ImageBrush ImageSource="/next.png"/>
             </Button.OpacityMask>
         </Button>
+        <Button x:Name="btn_baka" HorizontalAlignment="Left" Height="97" Margin="555,0,0,0" VerticalAlignment="Top" Width="98" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <Button.Foreground>
+                <ImageBrush/>
+            </Button.Foreground>
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush Stretch="None" Opacity="0"/>
+            </Button.Background>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <SoundPlayerAction Source="Resources/baka.wav" />
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
     </Grid>
 </Window>

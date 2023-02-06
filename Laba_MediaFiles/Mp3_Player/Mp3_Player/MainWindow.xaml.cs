@@ -28,6 +28,8 @@ using System.Windows.Shapes;
     8 Отображение общей длительности воспроизводимого файла и           8 YES
       текущего времени воспроизведения.
     9 Возможность регулирования громкости воспроизведения.              9 YES
+
+Все сообщения обеих программ (ошибки и уведомления), должны сопровождаться звуками. NO
 */
 
 //подключение пространства имён
@@ -55,6 +57,9 @@ namespace Mp3_Player
         public MainWindow()
         {
             InitializeComponent();
+
+            // прячу кнопку 
+            //btn_baka.Visibility = Visibility.Hidden;
 
             // установка громкости 
             player.Volume = volume.Value;
@@ -93,8 +98,27 @@ namespace Mp3_Player
             //загрузка всех выбранных файлов в словарь и листбокс  
             foreach (string filename in dlg.FileNames)
             {
-                plist.Add(System.IO.Path.GetFileName(filename), filename);
-                playlist.Items.Add(System.IO.Path.GetFileName(filename));
+                // созданеие буферной переменной для проверки 
+                Dictionary<string, string> buf = new Dictionary<string, string>();
+                buf.Add(System.IO.Path.GetFileName(filename), filename);
+
+                try
+                {
+                    // если такого имени ещё не было - добавляем 
+                    if (!plist.ContainsKey(System.IO.Path.GetFileName(filename)))
+                    {
+                        plist.Add(System.IO.Path.GetFileName(filename), filename);
+                        playlist.Items.Add(System.IO.Path.GetFileName(filename));
+                    }
+                }
+                catch (Exception ex) //если возникла ошибка, вывести сообщение об ошибке
+                {
+                    MessageBox.Show(ex.ToString());
+
+                    // Oops
+                    SystemSounds.Hand.Play();
+                }
+
             }
         }
 
@@ -115,27 +139,35 @@ namespace Mp3_Player
 
         private void Player_MediaOpened(object sender, EventArgs e)
         {
-            // установка максимума ползунка 
-            progress_bar.Maximum = player.NaturalDuration.TimeSpan.Ticks;
+            try
+            {
+                // установка максимума ползунка 
+                progress_bar.Maximum = player.NaturalDuration.TimeSpan.Ticks;
 
-            // установка времени скока всего идёт трек
-            dur.Content = player.NaturalDuration.TimeSpan.ToString().Substring(0, 8);
+                // установка времени скока всего идёт трек
+                dur.Content = player.NaturalDuration.TimeSpan.ToString().Substring(0, 8);
 
-            // вывод имени трека 
-            tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
+                // вывод имени трека 
+                tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
 
-            now_moment.Content = "00:00:00";
+                now_moment.Content = "00:00:00";
+            }
+            catch (Exception ex) //если возникла ошибка, вывести сообщение об ошибке
+            {
+                player.Stop();
+
+                // Oops
+                SoundPlayer sp = new SoundPlayer();
+                sp.Stream = Properties.Resources.BAKA;
+                sp.Play();
+
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void play_Click(object sender, RoutedEventArgs e)
         {
-            // установка времени скока всего идёт трек
-            dur.Content = player.NaturalDuration.TimeSpan.ToString().Substring(0, 8);
-
-            // вывод имени трека 
-            tr_name.Content = System.IO.Path.GetFileName(plist[playlist.SelectedItem.ToString()]);
-
-            // воспроизведение
+            //// воспроизведение
             player.Play();
 
             // запуск таймера 

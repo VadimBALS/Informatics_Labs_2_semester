@@ -14,3 +14,4 @@ C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_MediaFiles\Mp3_Player\Mp
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_MediaFiles\Mp3_Player\Mp3_Player\obj\Debug\Mp3_Player.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_MediaFiles\Mp3_Player\Mp3_Player\obj\Debug\Mp3_Player.exe
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_MediaFiles\Mp3_Player\Mp3_Player\obj\Debug\Mp3_Player.pdb
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_MediaFiles\Mp3_Player\Mp3_Player\bin\Debug\Resource.Designer.cs
