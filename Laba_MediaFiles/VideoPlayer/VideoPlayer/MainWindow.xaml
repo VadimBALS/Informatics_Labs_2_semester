@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VideoPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="470" Width="800">
+    <Window.Background>
+        <ImageBrush ImageSource="/wallp.jpg"/>
+    </Window.Background>
     <Grid>
-        
+        <Button x:Name="pause" Content="" HorizontalAlignment="Left" Margin="355,374,0,0" VerticalAlignment="Top" Height="50" Width="50" Click="pause_Click" BorderBrush="Black" Background="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/pause.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Slider x:Name="progress_bar" HorizontalAlignment="Left" Height="16" Margin="27,353,0,0" VerticalAlignment="Top" Width="596" Thumb.DragStarted="progress_bar_DragStarted" Thumb.DragCompleted="progress_bar_ValueChanged" Background="Black"/>
+        <Label x:Name="dur" Content="" HorizontalAlignment="Left" Height="28" Margin="571,325,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="now_moment" Content="" HorizontalAlignment="Left" Height="28" Margin="10,325,0,0" VerticalAlignment="Top" Width="80" Foreground="White"/>
+        <Slider x:Name="volume" HorizontalAlignment="Left" Height="16" Margin="638,353,0,0" VerticalAlignment="Top" Width="134" RenderTransformOrigin="0.5,0.5" Foreground="#FF190B0B" LargeChange="0.01" Maximum="1" Value="0.2" Background="Black"/>
+        <Button x:Name="play" Content="" HorizontalAlignment="Left" Margin="300,374,0,0" VerticalAlignment="Top" Height="50" Width="50" Background="Black" Click="play_Click" BorderBrush="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/play.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <Button x:Name="load" Content="" HorizontalAlignment="Left" Margin="27,374,0,0" VerticalAlignment="Top" Height="50" Width="50" Background="Black" Click="load_Click" BorderBrush="Black">
+            <Button.OpacityMask>
+                <ImageBrush ImageSource="/download.png"/>
+            </Button.OpacityMask>
+        </Button>
+        <MediaElement x:Name="vplayer" HorizontalAlignment="Left" Height="297" Margin="27,21,0,0" VerticalAlignment="Top" Width="743" UnloadedBehavior="Manual" Volume="0.2" ScrubbingEnabled="True"/>
     </Grid>
 </Window>

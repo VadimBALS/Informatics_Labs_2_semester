@@ -67,5 +67,13 @@ namespace VideoPlayer.Properties
                 resourceCulture = value;
             }
         }
+
+        internal static System.IO.UnmanagedMemoryStream baka
+        {
+            get
+            {
+                return ResourceManager.GetStream("baka", resourceCulture);
+            }
+        }
     }
 }

@@ -58,9 +58,6 @@ namespace Mp3_Player
         {
             InitializeComponent();
 
-            // прячу кнопку 
-            //btn_baka.Visibility = Visibility.Hidden;
-
             // установка громкости 
             player.Volume = volume.Value;
 
