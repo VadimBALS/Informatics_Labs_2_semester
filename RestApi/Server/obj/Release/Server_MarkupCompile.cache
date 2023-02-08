@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\RestApi\Server\obj\Debug\
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\RestApi\Server\obj\Release\
 Server
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\RestApi\Server\App.xaml
 1219584333
 
