@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Laba_Graphic",
+    "\\Laba_Graphic\\Laba_Graphic"
   ],
+  "SelectedNode": "\\Laba_Graphic\\Laba_Graphic\\MainWindow.xaml.cs",
   "PreviewInSolutionExplorer": false
 }
