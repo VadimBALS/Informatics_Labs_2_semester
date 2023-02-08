@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Laba_Graphic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" KeyDown="way_KeyDown">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFEF3232" Offset="0.2"/>
+                <GradientStop Color="#FF981AA0" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Canvas x:Name="cnv" HorizontalAlignment="Left" Height="382" Margin="27,25,0,0" VerticalAlignment="Top" Width="588"/>
+        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Height="32" Margin="653,36,0,0" VerticalAlignment="Top" Width="104" Click="clear_Click" FontSize="18"/>
+        <Label Content="2D Graphics" HorizontalAlignment="Center" Height="40" Margin="0,1,0,0" VerticalAlignment="Top" Width="140" FontSize="24"/>
+        <Menu HorizontalAlignment="Left" Height="32" Margin="653,101,0,0" VerticalAlignment="Top" Width="104">
+            <MenuItem Header="Drow" Width="104" Height="32" FontSize="18">
+                <MenuItem Header="Drow Line \" Click="dr_line_Click" />
+                <MenuItem Header="Drow Circle" Click="dr_circle_Click" />
+                <MenuItem Header="Drow Rectangle" Click="dr_rectangle_Click" />
+                <MenuItem Header="Drow Polygon" Click="dr_polygon_Click" />
+                <MenuItem Header="Drow Heart \" Click="dr_heart_Click" />
+                <MenuItem Header="Men" Click="BOOM_Click" />
+                <MenuItem Header="Watch" Click="watch_Click" Background="#FF4ECDED" />
+            </MenuItem>
+
+        </Menu>
+
     </Grid>
 </Window>
