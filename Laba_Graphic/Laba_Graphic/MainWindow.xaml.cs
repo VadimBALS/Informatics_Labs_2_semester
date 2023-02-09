@@ -93,6 +93,8 @@ namespace Laba_Graphic
         {
             secang += 6;
             sec.RenderTransform = new RotateTransform(secang%360, 275, 195);
+
+            time.Content = dts.ToString();
         }
         private void Dtm_Tick(object sender, EventArgs e)
         {
@@ -104,7 +106,72 @@ namespace Laba_Graphic
             hang += 6;
             hour.RenderTransform = new RotateTransform(hang % 360, 275, 195);
         }
-        
+        private void watch_Click(object sender, RoutedEventArgs e)
+        {
+            //создание объекта овал
+            Ellipse myEllipse = new Ellipse();
+
+            //создание объекта кисть
+            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
+
+            //установка цвета в виде сочетания компонент ARGB (alpha, red, green, blue)
+            mySolidColorBrush.Color = Color.FromArgb(255, 78, 205, 237);
+
+            //установка объекта кисти в параметр заливки объекта овал
+            myEllipse.Fill = mySolidColorBrush;
+            
+            //установка цвета линии
+            sec.Stroke = System.Windows.Media.Brushes.Black;
+            min.Stroke = System.Windows.Media.Brushes.Black;
+            hour.Stroke = System.Windows.Media.Brushes.Black;
+
+            //толщина и цвет обводки
+            myEllipse.StrokeThickness = 1;
+            myEllipse.Stroke = Brushes.Black;
+
+            //размеры овала
+            myEllipse.Width = 350;
+            myEllipse.Height = 350;
+
+            //позиция овала
+            myEllipse.Margin = new Thickness(100, 20, 0, 0);
+
+            //добавление овала в сцену
+            cnv.Children.Add(myEllipse);
+
+            //координаты начала линии
+            sec.X1 = 275;   min.X1 = 275;   hour.X1 = 275;
+            sec.Y1 = 195;   min.Y1 = 195;   hour.Y1 = 195;
+
+            //координаты конца линии
+            sec.X2 = 275;   min.X2 = 275; hour.X2 = 275;
+            sec.Y2 = 35;    min.Y2 = 65; hour.Y2 = 95;
+
+            //параметры выравнивания в сцене
+            sec.HorizontalAlignment = HorizontalAlignment.Left;
+            sec.VerticalAlignment = VerticalAlignment.Center;
+            min.HorizontalAlignment = HorizontalAlignment.Left;
+            min.VerticalAlignment = VerticalAlignment.Center;
+            hour.HorizontalAlignment = HorizontalAlignment.Left;
+            hour.VerticalAlignment = VerticalAlignment.Center;
+            
+            //толщина линии
+            sec.StrokeThickness = 2;
+            min.StrokeThickness = 3;
+            hour.StrokeThickness = 5;
+
+            //добавление линий в сцену
+            cnv.Children.Add(sec);
+            cnv.Children.Add(min);
+            cnv.Children.Add(hour);
+
+            dts.Start();
+            dtm.Start();
+            dth.Start();
+        }
+    
+
+
         private void Dtch_Tick(object sender, EventArgs e)
         {
             //определение номера текущего кадра (текущий кадр + 1 + общее число кадров) % общее число кадров
@@ -131,7 +198,65 @@ namespace Laba_Graphic
             // перемещение 
             chel.RenderTransform = new TranslateTransform(posX, posY);
         }
+        private void BOOM_Click(object sender, RoutedEventArgs e)
+        {
+            chel.Height = 128;
+            chel.Width = 128;
 
+            //кисть для заполнения прямоугольника фрагментом изображения
+            ImageBrush ib = new ImageBrush();
+
+            //настройки, позиция изображения будет указана как координаты левого верхнего угла
+            //изображение будет выведено без растяжения/сжатия
+            ib.AlignmentX = AlignmentX.Left;
+            ib.AlignmentY = AlignmentY.Top;
+            ib.Stretch = Stretch.None;
+
+            //участок изображения который будет нарисован
+            ib.Viewbox = new Rect(0, 0, 64, 64);
+            ib.ViewboxUnits = BrushMappingMode.Absolute;
+
+            //загрузка изображения и назначение кисти
+            ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pic/peop.png",
+            UriKind.Absolute));
+            chel.Fill = ib;
+
+            // увеличение чела 
+            chel.RenderTransform = new ScaleTransform(1.1, 1.1);
+
+            //добавление прямоугольника в сцену
+            cnv.Children.Add(chel);
+
+            // запуск таймера 
+            dtср.Start();
+        }
+        private void way_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.I) // /\
+            {
+                i = true; k = false; l = false; j = false;
+                currentRow = 2;
+            }
+            if (e.Key == Key.K) // \/
+            {
+                k = true; i = false; l = false; j = false;
+                currentRow = 6;
+            }
+            if (e.Key == Key.L) // >
+            {
+                l = true; k = false; i = false;  j = false;
+                currentRow = 4;
+            }
+            if (e.Key == Key.J) // <
+            {
+                j = true; k = false; i = false; l = false; 
+                currentRow = 0;
+            }
+
+        }
+
+        
+        
         private void clear_Click(object sender, RoutedEventArgs e)
         {
             cnv.Children.Clear();
@@ -190,8 +315,8 @@ namespace Laba_Graphic
             myEllipse.Stroke = Brushes.Black;
 
             //размеры овала
-            myEllipse.Width = 100;
-            myEllipse.Height = 100;
+            myEllipse.Width = 300;
+            myEllipse.Height = 300;
 
             //позиция овала
             myEllipse.Margin = new Thickness(50, 50, 0, 0);
@@ -308,10 +433,17 @@ namespace Laba_Graphic
             cnv.Children.Add(path);
 
         }
+        
+        
+        Ellipse myEllipse = new Ellipse();
         private void dr_meme_Click(object sender, RoutedEventArgs e)
         {
             //создание объекта овал
-            Ellipse myEllipse = new Ellipse();
+            myEllipse = new  Ellipse();
+
+            // добавление обработчика события, которое срабатывает, когда курсор мыши попадает в область фигуры
+            //эта часть должна быть там же, где создаётся фигура
+            myEllipse.MouseEnter += MyEllipse_MouseEnter;
 
             //кисть для заполнения прямоугольника изображением
             ImageBrush ib = new ImageBrush();
@@ -339,126 +471,19 @@ namespace Laba_Graphic
             //добавление овала в сцену
             cnv.Children.Add(myEllipse);
         }
-
-        private void BOOM_Click(object sender, RoutedEventArgs e)
+        private void MyEllipse_MouseEnter(object sender, MouseEventArgs e)
         {
-            chel.Height = 128;
-            chel.Width = 128;
-
-            //кисть для заполнения прямоугольника фрагментом изображения
+            //создание новой кисти
             ImageBrush ib = new ImageBrush();
-
-            //настройки, позиция изображения будет указана как координаты левого верхнего угла
-            //изображение будет выведено без растяжения/сжатия
-            ib.AlignmentX = AlignmentX.Left;
-            ib.AlignmentY = AlignmentY.Top;
-            ib.Stretch = Stretch.None;
-
-            //участок изображения который будет нарисован
-            ib.Viewbox = new Rect(0, 0, 64, 64);
-            ib.ViewboxUnits = BrushMappingMode.Absolute;
-
-            //загрузка изображения и назначение кисти
-            ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pic/peop.png",
-            UriKind.Absolute));
-            chel.Fill = ib;
-
-            // увеличение чела 
-            chel.RenderTransform = new ScaleTransform(1.1, 1.1);
-
-            //добавление прямоугольника в сцену
-            cnv.Children.Add(chel);
-
-            // запуск таймера 
-            dtср.Start();
-        }
-        private void way_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.I) // /\
-            {
-                i = true; k = false; l = false; j = false;
-                currentRow = 2;
-            }
-            if (e.Key == Key.K) // \/
-            {
-                k = true; i = false; l = false; j = false;
-                currentRow = 6;
-            }
-            if (e.Key == Key.L) // >
-            {
-                l = true; k = false; i = false;  j = false;
-                currentRow = 4;
-            }
-            if (e.Key == Key.J) // <
-            {
-                j = true; k = false; i = false; l = false; 
-                currentRow = 0;
-            }
-
+            //загрузка нового изображения и назначение кисти
+            ib.ImageSource = new BitmapImage(new Uri(@"pack://application:,,,/pic/gch2.png",UriKind.Absolute));
+            myEllipse.Fill = ib;
         }
 
-        private void watch_Click(object sender, RoutedEventArgs e)
-        {
-            //создание объекта овал
-            Ellipse myEllipse = new Ellipse();
+        
+        
 
-            //создание объекта кисть
-            SolidColorBrush mySolidColorBrush = new SolidColorBrush();
-
-            //установка цвета в виде сочетания компонент ARGB (alpha, red, green, blue)
-            mySolidColorBrush.Color = Color.FromArgb(255, 78, 205, 237);
-
-            //установка объекта кисти в параметр заливки объекта овал
-            myEllipse.Fill = mySolidColorBrush;
-            
-            //установка цвета линии
-            sec.Stroke = System.Windows.Media.Brushes.Black;
-            min.Stroke = System.Windows.Media.Brushes.Black;
-            hour.Stroke = System.Windows.Media.Brushes.Black;
-
-            //толщина и цвет обводки
-            myEllipse.StrokeThickness = 1;
-            myEllipse.Stroke = Brushes.Black;
-
-            //размеры овала
-            myEllipse.Width = 350;
-            myEllipse.Height = 350;
-
-            //позиция овала
-            myEllipse.Margin = new Thickness(100, 20, 0, 0);
-
-            //добавление овала в сцену
-            cnv.Children.Add(myEllipse);
-
-            //координаты начала линии
-            sec.X1 = 275;   min.X1 = 275;   hour.X1 = 275;
-            sec.Y1 = 195;   min.Y1 = 195;   hour.Y1 = 195;
-
-            //координаты конца линии
-            sec.X2 = 275;   min.X2 = 275; hour.X2 = 275;
-            sec.Y2 = 35;    min.Y2 = 65; hour.Y2 = 95;
-
-            //параметры выравнивания в сцене
-            sec.HorizontalAlignment = HorizontalAlignment.Left;
-            sec.VerticalAlignment = VerticalAlignment.Center;
-            min.HorizontalAlignment = HorizontalAlignment.Left;
-            min.VerticalAlignment = VerticalAlignment.Center;
-            hour.HorizontalAlignment = HorizontalAlignment.Left;
-            hour.VerticalAlignment = VerticalAlignment.Center;
-            
-            //толщина линии
-            sec.StrokeThickness = 2;
-            min.StrokeThickness = 3;
-            hour.StrokeThickness = 5;
-
-            //добавление линий в сцену
-            cnv.Children.Add(sec);
-            cnv.Children.Add(min);
-            cnv.Children.Add(hour);
-
-            dts.Start();
-            dtm.Start();
-            dth.Start();
-        }
+        
+        
     }
 }

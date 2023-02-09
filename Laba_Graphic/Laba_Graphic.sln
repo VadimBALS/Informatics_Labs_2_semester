@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Laba_Graphic", "Laba_Graphic\Laba_Graphic.csproj", "{69C60BBA-6619-4AFB-9B69-391A6A4258CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2D", "Laba_Graphic\2D.csproj", "{69C60BBA-6619-4AFB-9B69-391A6A4258CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3D", "3D\3D.csproj", "{6F286DC1-ECD2-427C-A397-9AAFE29A021D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{69C60BBA-6619-4AFB-9B69-391A6A4258CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69C60BBA-6619-4AFB-9B69-391A6A4258CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69C60BBA-6619-4AFB-9B69-391A6A4258CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F286DC1-ECD2-427C-A397-9AAFE29A021D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F286DC1-ECD2-427C-A397-9AAFE29A021D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F286DC1-ECD2-427C-A397-9AAFE29A021D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F286DC1-ECD2-427C-A397-9AAFE29A021D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
