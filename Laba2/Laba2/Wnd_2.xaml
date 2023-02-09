@@ -15,7 +15,7 @@
         </Grid.Background>
         <TextBox x:Name="tb" HorizontalAlignment="Left" Height="24" Margin="25,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="165"/>
         <Button x:Name="add_s" Content="Add string" HorizontalAlignment="Left" Height="25" Margin="25,117,0,0" VerticalAlignment="Top" Width="116" Click="add_s_Click"/>
-        <Label x:Name="res" Content="" HorizontalAlignment="Left" Height="95" Margin="213,77,0,0" VerticalAlignment="Top" Width="230" Foreground="White"/>
+        <ListBox x:Name="res" HorizontalAlignment="Left" Height="118" Margin="229,77,0,0" VerticalAlignment="Top" Width="229" d:ItemsSource="{d:SampleData ItemCount=5}"/>
 
     </Grid>
 </Window>

@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace Laba2
 {
-    /// <summary>
-    /// Логика взаимодействия для Wnd_2.xaml
-    /// </summary>
     public partial class Wnd_2 : Window
     {
         public Wnd_2()
@@ -25,7 +22,8 @@ namespace Laba2
         }
         private void add_s_Click(object sender, RoutedEventArgs e)
         {
-            res.Content = tb.Text;
+            res.Items.Add(tb.Text);
+            tb.Text = "";
         }
     }
 }
