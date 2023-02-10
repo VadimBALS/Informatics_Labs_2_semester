@@ -20,7 +20,14 @@ namespace Laba_DB
         {
             InitializeComponent();
         }
+        public Wnd_2(string uname, int g_m, int g_p)
+        {
+            InitializeComponent();
 
+            name.Text = uname;
+            g_math.Text = g_m.ToString();
+            g_phys.Text = g_p.ToString();
+        }
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;

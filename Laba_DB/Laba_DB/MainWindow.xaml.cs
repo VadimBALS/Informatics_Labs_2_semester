@@ -62,7 +62,6 @@ namespace Laba_DB
             InitializeComponent();
 
             /*
-            
             // ################### CREATE DB FILE ################### 
              
             SQLiteConnection.CreateFile(""D:\\MyDocs\\method\\intsys\\test.db"");
@@ -134,8 +133,7 @@ namespace Laba_DB
             public int uid { get; set; }
         }
 
-
-        // отслеживание сколько всего студентов в БД
+        // отслеживание сколько всего студентов в БД и Уникальный Идентификационный Номер (UID)
         int number_of_students = 0;
 
         private void Button_Click_start_db_con(object sender, RoutedEventArgs e)
@@ -153,10 +151,10 @@ namespace Laba_DB
             //открытие соединения с базой данных
             m_dbConnection.Open();
         }
-        
+
         private void Button_Click_show_data(object sender, RoutedEventArgs e)
         {
-            // очистка БД
+            // очистка дистбокса БД
             this.data.Items.Clear();
 
             // обнуление кол-вa студентов 
@@ -227,19 +225,36 @@ namespace Laba_DB
 
         private void Button_Click_add_student(object sender, RoutedEventArgs e)
         {
+            // буфер для последнего UID для образования нового 
+            int last_uid = 0;
+
+            // формирование запроса для вывода данных из БД
+            string sql = "select students.uid from students";
+
+            // задаётся команда 
+            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+
+            // извлекается 
+            SQLiteDataReader reader = command.ExecuteReader();
+
+            // результат работы запроса = reader (спец переменная с инфой из БД)
+            // находим последний UID для образования нового 
+            while (reader.Read())
+                last_uid = int.Parse(reader["uid"].ToString());
+
             Wnd_1 window = new Wnd_1();
 
             if (window.ShowDialog() == true)
             {
                 // добавление новенького
-                number_of_students++;
+                last_uid++;
 
                 // формирование запроса
-                string sql = $"INSERT INTO `grades` (`uid`, `math`, `phys`) VALUES ( {number_of_students}, {int.Parse(window.g_math.Text)}, {int.Parse(window.g_phys.Text)});" +
-                             $"INSERT INTO `students` (`uid`, `fio`) VALUES ( {number_of_students}, \"{window.name.Text}\");";
+                sql = $"INSERT INTO `grades` (`uid`, `math`, `phys`) VALUES ( {last_uid}, {int.Parse(window.g_math.Text)}, {int.Parse(window.g_phys.Text)});" +
+                      $"INSERT INTO `students` (`uid`, `fio`) VALUES ( {last_uid}, \"{window.name.Text}\");";
 
                 // отправка запроса  
-                SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+                command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteNonQuery();
             }
         }
@@ -259,13 +274,9 @@ namespace Laba_DB
                 // отправка запроса 
                 SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteNonQuery();
-
-                number_of_students--;
             }
         }
 
-
-        // ################### Как передать инфу в Wnd_2 ? ################### 
         private void edit_entry_Click(object sender, RoutedEventArgs e)
         {
             // проверка на наличие выделенного поля в гриде 
@@ -274,7 +285,7 @@ namespace Laba_DB
                 // создание экземпляра структуры и загрузка в неё данных из грида
                 SField test = (SField)(data.SelectedItem);
 
-                Wnd_2 window = new Wnd_2();
+                Wnd_2 window = new Wnd_2(test.fio, test.math, test.phys);
 
                 if (window.ShowDialog() == true)
                 {
