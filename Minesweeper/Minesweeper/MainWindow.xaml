@@ -5,8 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Alien Minesweeper" Height="500" Width="900" Background="Black">
     <Grid>
-        
+        <Grid.Background>
+            <ImageBrush ImageSource="/wallpep_2.jpeg"/>
+        </Grid.Background>
+        <UniformGrid x:Name="ugr" Rows="5" Columns="5" Margin="223,67,42,51"/>
+        <Button Name="Start" Content="START" HorizontalAlignment="Left" Margin="32,220,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="Start_Click" FontSize="26" Foreground="White" OpacityMask="#FF019483">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <TextBox Name="CountMinesTxt" HorizontalAlignment="Left" Height="35" Margin="32,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" FontSize="18" Text="2"/>
+        <Label Content="Mines Count" HorizontalAlignment="Left" Margin="23,146,0,0" VerticalAlignment="Top" Foreground="White" FontSize="18"/>
+        <Label Name="RealCount" Content="Generated count mines" HorizontalAlignment="Left" Margin="23,265,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        <TextBox Name="Size" HorizontalAlignment="Left" Height="35" Margin="32,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" FontSize="18" Text="7"/>
+        <Label Content="Field Size (NxN)" HorizontalAlignment="Left" Margin="23,72,0,0" VerticalAlignment="Top" Foreground="White" Width="135" Height="32" FontSize="18"/>
+        <Label Content="Alien Minesweeper" HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="210" Foreground="White" FontSize="24"/>
+        <Button x:Name="Start_Cl" Content="START" HorizontalAlignment="Left" Margin="23,386,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="26" Foreground="White" OpacityMask="#FF019483" Click="Start_Cl_Click">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <ComboBox x:Name="dif_var" HorizontalAlignment="Left" Height="35" Margin="32,343,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label Content="Difficulty" HorizontalAlignment="Left" Margin="23,306,0,0" VerticalAlignment="Top" Foreground="White" Width="135" Height="32" FontSize="18"/>
+
     </Grid>
 </Window>

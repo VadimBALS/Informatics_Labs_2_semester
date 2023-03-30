@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C9B48D1A-FE5F-4D90-8B2B-98C63F00F15E}</ProjectGuid>
+    <ProjectGuid>{568D70C4-F02D-4ADC-AC6E-6E34BB744B58}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Minesweeper</RootNamespace>
     <AssemblyName>Minesweeper</AssemblyName>
@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FieldGen.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -93,6 +94,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\facehugger.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\egg_pixelart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wallpep_2.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\aliens_egg_1.png" />
+    <Resource Include="img\aliens_egg_2.png" />
+    <Resource Include="img\aliens_egg_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\aliens_egg_4.png" />
+    <Resource Include="img\aliens_egg_5.png" />
+    <Resource Include="img\aliens_egg_6.png" />
+    <Resource Include="img\aliens_egg_7.png" />
+    <Resource Include="img\aliens_egg_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\aliens_egg_0.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
