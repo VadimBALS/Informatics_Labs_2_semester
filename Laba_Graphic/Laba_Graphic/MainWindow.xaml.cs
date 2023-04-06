@@ -16,10 +16,21 @@ using System.Windows.Threading;
 
 /*
 Необходимо разработать и реализовать примеры приведенные в лабораторных работах.
+    Линия                   YES   
+    Круг                    YES
+    Квадрат                 YES
+    Многоугольник           YES
+    Сердечко                YES 
+    Фигурка с картинкой     YES
+    Анимация                YES
 
-    Требуется реализовать “часы”: используя фигуры “эллипс” и “линия”, а также, 
+    Требуется реализовать “часы”: используя фигуры “эллипс” и “линия”, а также,    YES
     объект DispatcherTimer, реализовать двумерные часы со стрелками.
 */
+
+
+
+
 namespace Laba_Graphic
 {
     public partial class MainWindow : Window
@@ -76,16 +87,20 @@ namespace Laba_Graphic
         {
             InitializeComponent();
 
+            // для анимации 
             dtср.Interval = new TimeSpan(0, 0, 0, 0, 125);
             dtср.Tick += Dtch_Tick;
 
-            dts.Interval = new TimeSpan(0, 0, 0, 0, 500);
+            // для секунд на часах 
+            dts.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dts.Tick += Dts_Tick;
 
-            dtm.Interval = new TimeSpan(0, 0, 0, 2);
+            // для минут на часах 
+            dtm.Interval = new TimeSpan(0, 0, 0, 0, 60);
             dtm.Tick += Dtm_Tick;
 
-            dth.Interval = new TimeSpan(0, 0, 0, 5);
+            // часов на часах 
+            dth.Interval = new TimeSpan(0, 0, 0, 0, 3720);
             dth.Tick += Dth_Tick;
         }
 
@@ -93,8 +108,6 @@ namespace Laba_Graphic
         {
             secang += 6;
             sec.RenderTransform = new RotateTransform(secang%360, 275, 195);
-
-            time.Content = dts.ToString();
         }
         private void Dtm_Tick(object sender, EventArgs e)
         {

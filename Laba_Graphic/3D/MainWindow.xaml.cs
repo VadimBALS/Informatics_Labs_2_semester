@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+/*
+    Сделать гору YES
+*/
+
 //пространство имён для работы с 3D
 using System.Windows.Media.Media3D;
 using Microsoft.Win32;

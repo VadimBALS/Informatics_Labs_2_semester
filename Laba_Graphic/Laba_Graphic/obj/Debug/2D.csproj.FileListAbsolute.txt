@@ -1,0 +1,16 @@
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\bin\Debug\Laba_Graphic.exe.config
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\bin\Debug\Laba_Graphic.exe
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\bin\Debug\Laba_Graphic.pdb
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\2D.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\2D.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\MainWindow.g.cs
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\App.g.cs
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic_MarkupCompile.cache
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic_MarkupCompile.lref
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\MainWindow.baml
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic.g.resources
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic.Properties.Resources.resources
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\2D.csproj.GenerateResource.cache
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\2D.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic.exe
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Laba_Graphic\Laba_Graphic\obj\Debug\Laba_Graphic.pdb
