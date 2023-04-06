@@ -104,9 +104,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="wallp.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="download.png" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +114,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\baka.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="wallp.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

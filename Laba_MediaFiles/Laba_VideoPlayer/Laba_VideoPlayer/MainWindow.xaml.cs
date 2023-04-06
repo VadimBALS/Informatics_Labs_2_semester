@@ -21,17 +21,17 @@ using System.Windows.Threading;
 Разработать и реализовать программу “Video Player” на основе компонента MediaElement. 
 Программа должна содержать следующий функционал:
 
-    1 Выбор и загрузка видео файла.
-    2 Возможность остановить, запустить и поставить на паузу текущий воспроизводимый файл.
-    3 Возможность перейти к произвольному моменту воспроизводимого файла при помощи компонента Slider.
-    4 Отображение общей длительности воспроизводимого файла и текущего времени воспроизведения.
-    5 Возможность регулирования громкости воспроизведения.
+    1 Выбор и загрузка видео файла.                                                                     YES
+    2 Возможность остановить, запустить и поставить на паузу текущий воспроизводимый файл.              YES
+    3 Возможность перейти к произвольному моменту воспроизводимого файла при помощи компонента Slider.  YES
+    4 Отображение общей длительности воспроизводимого файла и текущего времени воспроизведения.         YES
+    5 Возможность регулирования громкости воспроизведения.                                              YES
 
 Все сообщения обеих программ (ошибки и уведомления), должны сопровождаться звуками.
 */
 
 //подключение пространства имён
-using System.Media;
+//using System.Media;
 
 namespace Laba_VideoPlayer
 {
@@ -125,30 +125,6 @@ namespace Laba_VideoPlayer
             }
         }
 
-        private void play_Click(object sender, RoutedEventArgs e)
-        {
-            // воспроизведение
-            vplayer.Play();
-
-            // запуск таймера 
-            dt.Start();
-        }
-
-        //private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        //{
-        //    // громкость звука = значению громкости
-        //    vplayer.Volume = volume.Value;
-        //}
-
-        private void pause_Click(object sender, RoutedEventArgs e)
-        {
-            // остановка воспроизведения 
-            vplayer.Pause();
-
-            //остановка тймера
-            dt.Stop();
-        }
-
         private void progress_bar_ValueChanged(object sender, DragCompletedEventArgs e)
         {
             // изменение момента трека ручками 
@@ -165,6 +141,35 @@ namespace Laba_VideoPlayer
             uptd = true;
         }
 
+        private void play_Click(object sender, RoutedEventArgs e)
+        {
+            // воспроизведение
+            vplayer.LoadedBehavior = MediaState.Play;
 
+            // запуск таймера 
+            dt.Start();
+        }
+
+        private void pause_Click(object sender, RoutedEventArgs e)
+        {
+            // остановка воспроизведения 
+            vplayer.LoadedBehavior = MediaState.Pause;
+
+            //остановка тймера
+            dt.Stop();
+        }
+
+        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            // громкость звука видео = значению громкости на ползунке 
+            if (vplayer != null)
+                vplayer.Volume = volume.Value;
+        }
+
+        private void stop_Click(object sender, RoutedEventArgs e)
+        {
+            // остановка воспроизведения 
+            vplayer.LoadedBehavior = MediaState.Stop;
+        }
     }
 }
