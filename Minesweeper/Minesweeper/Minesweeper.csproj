@@ -119,5 +119,14 @@
   <ItemGroup>
     <Resource Include="img\aliens_egg_0.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="music1\facehugger_baby.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="music1\facehugger_boy.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="music1\facehugger_man.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace Minesweeper
 {
@@ -31,107 +34,97 @@ namespace Minesweeper
         BitmapImage egg_7 = new BitmapImage(new Uri(@"pack://application:,,,/img/aliens_egg_7.png", UriKind.Absolute));
         BitmapImage egg_8 = new BitmapImage(new Uri(@"pack://application:,,,/img/aliens_egg_8.png", UriKind.Absolute));
 
+        //звук смерти 
+        SoundPlayer death = new SoundPlayer();
 
+        // музыка 
+        MediaPlayer player = new MediaPlayer();
 
-        //
-        int[,] field;
-
-        // size of btn
+        // размер кнопки 
         int size_btn = 50;
 
-        // размер поля 
-        int N = 5;
+        // статусас
+        bool fail = false;
 
-        // 
-        Dictionary<int, int> mines = new Dictionary<int, int>();
-
-        // 
-        int countMines;
-
-        // 
+        // кол-во мин
+        int count_mines;
+        
+        // размер поля
+        int N;
+        
+        // осталось клеток
         int ost;
 
+        // экземпляр класса 
         FieldGen gen;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            // добавление уровни сложностей 
             dif_var.Items.Add("Baby");
             dif_var.Items.Add("Boy");
             dif_var.Items.Add("Man");
 
+            //выбор медиа файла, например, в формате .mp3
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.ShowDialog();
+
+            //загрузка выбранного файла
+            player.Open(new Uri(dlg.FileName, UriKind.Relative));
+            player.Volume = volume.Value;
+            player.Play();
+
+        }
+
+
+        
+
+        private void Start_Cl_Click(object sender, RoutedEventArgs e)
+        {
+            player.Play();
+            // установка статуса 
+            fail = false;
+
+            // установка отрицательного доступа к кнопке
+            Start_Cl.IsEnabled = false;
+
+            // проверка сложности и вывод кол-ва сгенеренных мин, установка звука смерти,
+            // определение кол-ва мин на поле
             if (dif_var.SelectedIndex != -1)
             {
-                gen = new FieldGen(N, dif_var.SelectedIndex);
+                gen = new FieldGen(dif_var.SelectedIndex);
                 gen.generate();
-            }
-        }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            int n = (int)((Button)sender).Tag;
-            ((Button)sender).Background = Brushes.White;
-            ((Button)sender).Foreground = Brushes.Black;
-            ((Button)sender).FontSize = 20;
-            if (mines[n] == 9)
-            {
-                // создание контейнера под картинку 
-                Image img = new Image();
-                // записть картинки 
-                img.Source = mine;
-                // создание компонента для отображения 
-                StackPanel stackPnl = new StackPanel();
-                // установка толщины границ компонента 
-                stackPnl.Margin = new Thickness(1);
-                // добавление контейнера с картинкой в компонент 
-                stackPnl.Children.Add(img);
-                // запись компонента в кнопку 
-                ((Button)sender).Content = stackPnl;
-
-                ((Button)sender).IsEnabled = false;
-
-                foreach (Button b in ugr.Children)
+                if (dif_var.SelectedIndex == 0)
                 {
-                    if (((Button)b).IsEnabled == true)
-                    {
-
-                        ((Button)b).RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        ost = ost - 1000;
-                    }
+                    RealCount.Content = "Generated mines: 3";
+                    count_mines = 3;
+                    N = 4;
+                    ost = 16;
+                    death.Stream = Properties.Resources.facehugger_baby;
                 }
-
-                if (ost < -1)
+                else if (dif_var.SelectedIndex == 1)
                 {
-                    MessageBox.Show("Поражение\nДля рестарта нажмите кнопку Старт");
-                    ost = ost + 999999;
+                    RealCount.Content = "Generated mines: 15";
+                    count_mines = 15;
+                    N = 7;
+                    ost = 49;
+                    death.Stream = Properties.Resources.facehugger_boy;
                 }
-                ((Button)Start).IsEnabled = true;
-
-
-            }
-            else
-            {
-                ost++;
-                ((Button)sender).Content = mines[n];
-                //MessageBox.Show(((N * N) - (countMines+1))+" "+ost);
-                if (ost == ((N*N) - (countMines + 1)))
+                else
                 {
-                    MessageBox.Show("Победа");
-                    ((Button)Start).IsEnabled = true;
+                    RealCount.Content = "Generated mines: 50";
+                    count_mines = 50;
+                    N = 11;
+                    ost = 121;
+                    death.Stream = Properties.Resources.facehugger_man;
                 }
             }
-            ((Button)sender).IsEnabled = false;
 
-        }
-
-        private void Start_Click(object sender, RoutedEventArgs e)
-        {
-
-            ost = 0;
-            mines.Clear();
+            // очистка сетки перед новой генерацией
             ugr.Children.Clear();
-            N = Convert.ToInt32(Size.Text);
 
             // кол-во строк и столбцов в сетке 
             ugr.Rows = N;
@@ -140,331 +133,7 @@ namespace Minesweeper
             // размеры сетки = число ячеек * (размер кнопки + толщина границы)
             ugr.Width = N * (size_btn + 4);
             ugr.Height = N * (size_btn + 4);
-
-            // толщина границ сетки 
-            ugr.Margin = new Thickness(5, 5, 5, 5);
-
-            // создание кнопок 
-            for (int i = 0; i < N * N; i++)
-            {
-                // создание кнопки 
-                Button btn = new Button();
-
-                // запись номера кнопки 
-                btn.Tag = i;
-
-                // установка размеров 
-                btn.Width = size_btn;
-                btn.Height = size_btn;
-
-                // добавление события 
-                btn.Click += Button_Click;
-
-                // создание контейнера под картинку 
-                Image img = new Image();
-                // записть картинки 
-                img.Source = egg;
-                // создание компонента для отображения 
-                StackPanel stackPnl = new StackPanel();
-                // установка толщины границ компонента 
-                stackPnl.Margin = new Thickness(0);
-                // добавление контейнера с картинкой в компонент 
-                stackPnl.Children.Add(img);
-                // запись компонента в кнопку 
-                btn.Content = stackPnl;
-
-                // добавление в сетку 
-                ugr.Children.Add(btn);
-            }
-
-
-            field = new int[N, N];
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    field[i, j] = 0;
-                }
-            }
-
-            AddMines(Convert.ToInt32(CountMinesTxt.Text));
-
-            int index = 0;
-            for (int i = 0; i < N; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    if (field[i, j] == 9)
-                    {
-                        mines.Add(index, 9);
-                    }
-                    else
-                    {
-                        mines.Add(index, field[i, j]);
-                    }
-                    index++;
-                }
-            }
-            ((Button)sender).IsEnabled = false;
-        }
-
-        void AddMines(int mines)
-        {
-            countMines = 0;
-            for (int i = 0; i < mines; i++)
-            {
-                Random rand = new Random();
-                int _i = rand.Next(0, N);
-                int _j = rand.Next(0, N);
-                int count = 0;
-                if (_i != 0 && _j != 0 && _i != (N - 1) && _j != (N - 1))
-                {
-                    if (field[_i - 1, _j - 1] == 9 || field[_i, _j - 1] == 9 || field[_i + 1, _j - 1] == 9 || field[_i - 1, _j] == 9 || field[_i + 1, _j] == 9 || field[_i - 1, _j + 1] == 9 || field[_i, _j + 1] == 9 || field[_i + 1, _j + 1] == 9 || field[_i, _j] == 9)
-                    {
-                        i--;
-                        count++;
-                        if (count > 25) break;
-                    }
-                    else
-                    {
-                        field[_i, _j] = 9;
-
-                        field[_i - 1, _j - 1] += 1;
-                        field[_i, _j - 1] += 1;
-                        field[_i + 1, _j - 1] += 1;
-                        field[_i - 1, _j] += 1;
-                        field[_i + 1, _j] += 1;
-                        field[_i - 1, _j + 1] += 1;
-                        field[_i, _j + 1] += 1;
-                        field[_i + 1, _j + 1] += 1;
-
-
-                        count = 0;
-                    }
-                }
-                else
-                {
-                    if (_i == 0 && _j == 0)
-                    {
-                        if (field[_i, _j + 1] == 9 || field[_i + 1, _j] == 9 || field[_i + 1, _j + 1] == 9 || field[_i, _j] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i, _j + 1] += 1;
-                            field[_i + 1, _j] += 1;
-                            field[_i + 1, _j + 1] += 1;
-
-                            count = 0;
-                        }
-                    }
-                    else if (_i == 0 && _j != 0 && _j != (N - 1))
-                    {
-                        if (field[_i, _j - 1] == 9 || field[_i, _j] == 9 || field[_i + 1, _j - 1] == 9 || field[_i + 1, _j] == 9 || field[_i, _j + 1] == 9 || field[_i + 1, _j + 1] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i, _j - 1] += 1;
-                            field[_i + 1, _j - 1] += 1;
-                            field[_i + 1, _j] += 1;
-                            field[_i, _j + 1] += 1;
-                            field[_i + 1, _j + 1] += 1;
-
-                            count = 0;
-                        }
-
-                    }
-                    else if (_i == 0 && _j == (N - 1))
-                    {
-                        if (field[_i, _j - 1] == 9 || field[_i + 1, _j] == 9 || field[_i + 1, _j - 1] == 9 || field[_i, _j] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i, _j - 1] += 1;
-                            field[_i + 1, _j] += 1;
-                            field[_i + 1, _j - 1] += 1;
-
-                            count = 0;
-                        }
-                    }
-                    else if (_i != 0 && _j == (N - 1) && _i != (N - 1))
-                    {
-                        if (field[_i - 1, _j - 1] == 9 || field[_i - 1, _j] == 9 || field[_i, _j] == 9 || field[_i + 1, _j] == 9 || field[_i, _j - 1] == 9 || field[_i + 1, _j - 1] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i - 1, _j - 1] += 1;
-                            field[_i - 1, _j] += 1;
-                            field[_i + 1, _j] += 1;
-                            field[_i, _j - 1] += 1;
-                            field[_i + 1, _j - 1] += 1;
-
-                            count = 0;
-                        }
-
-                    }
-                    else if (_i == (N - 1) && _j == (N - 1))
-                    {
-                        if (field[_i, _j - 1] == 9 || field[_i, _j] == 9 || field[_i - 1, _j] == 9 || field[_i - 1, _j - 1] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i, _j - 1] += 1;
-                            field[_i - 1, _j] += 1;
-                            field[_i - 1, _j - 1] += 1;
-
-                            count = 0;
-                        }
-                    }
-                    else if (_i == (N - 1) && _j != (N - 1) && _j != 0)
-                    {
-                        if (field[_i - 1, _j - 1] == 9 || field[_i, _j] == 9 || field[_i - 1, _j] == 9 || field[_i - 1, _j + 1] == 9 || field[_i, _j - 1] == 9 || field[_i, _j + 1] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i - 1, _j - 1] += 1;
-                            field[_i - 1, _j] += 1;
-                            field[_i - 1, _j + 1] += 1;
-                            field[_i, _j - 1] += 1;
-                            field[_i, _j + 1] += 1;
-
-                            count = 0;
-                        }
-
-                    }
-                    else if (_i == (N - 1) && _j == 0)
-                    {
-                        if (field[_i, _j + 1] == 9 || field[_i, _j] == 9 || field[_i - 1, _j] == 9 || field[_i - 1, _j + 1] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i, _j + 1] += 1;
-                            field[_i - 1, _j] += 1;
-                            field[_i - 1, _j + 1] += 1;
-
-                            count = 0;
-                        }
-                    }
-
-                    else if (_i != (N - 1) && _i != 0 && _j == 0)
-                    {
-                        if (field[_i - 1, _j + 1] == 9 || field[_i, _j] == 9 || field[_i, _j + 1] == 9 || field[_i + 1, _j + 1] == 9 || field[_i + 1, _j] == 9 || field[_i - 1, _j] == 9)
-                        {
-                            i--;
-                            count++;
-                            if (count > 25) break;
-                        }
-                        else
-                        {
-                            field[_i, _j] = 9;
-
-                            field[_i - 1, _j + 1] += 1;
-                            field[_i, _j + 1] += 1;
-                            field[_i + 1, _j + 1] += 1;
-                            field[_i + 1, _j] += 1;
-                            field[_i - 1, _j] += 1;
-
-                            count = 0;
-                        }
-
-                    }
-
-                }
-                countMines = i;
-            }
-            RealCount.Content = (countMines + 1).ToString();
-        }
-
-
-
-
-
-        private void Start_Cl_Click(object sender, RoutedEventArgs e)
-        {
-            gen = new FieldGen(N, dif_var.SelectedIndex);
-            gen.generate();
-
-            ugr.Children.Clear();
-
-            if (dif_var.SelectedIndex == 0)
-            {
-                N = 4;
-
-                // кол-во строк и столбцов в сетке 
-                ugr.Rows = N;
-                ugr.Columns = N;
-
-                // размеры сетки = число ячеек * (размер кнопки + толщина границы)
-                ugr.Width = N * (size_btn + 4);
-                ugr.Height = N * (size_btn + 4);
-            }
-            if (dif_var.SelectedIndex == 1)
-            {
-                N = 7;
-
-                // кол-во строк и столбцов в сетке 
-                ugr.Rows = N;
-                ugr.Columns = N;
-
-                // размеры сетки = число ячеек * (размер кнопки + толщина границы)
-                ugr.Width = N * (size_btn + 4);
-                ugr.Height = N * (size_btn + 4);
-            }
-            if (dif_var.SelectedIndex == 2)
-            {
-                N = 12;
-
-                // кол-во строк и столбцов в сетке 
-                ugr.Rows = N;
-                ugr.Columns = N;
-
-                // размеры сетки = число ячеек * (размер кнопки + толщина границы)
-                ugr.Width = N * (size_btn + 4);
-                ugr.Height = N * (size_btn + 4);
-
-            }
-
+            
             // толщина границ сетки 
             ugr.Margin = new Thickness(5, 5, 5, 5);
 
@@ -509,21 +178,31 @@ namespace Minesweeper
 
             if (gen.getCell(i % N, i / N) == 9)
             {
-                // создание контейнера под картинку 
-                Image img = new Image();
-                // записть картинки 
-                img.Source = mine;
-                // создание компонента для отображения 
-                StackPanel stackPnl = new StackPanel();
-                // установка толщины границ компонента 
-                stackPnl.Margin = new Thickness(0);
-                // добавление контейнера с картинкой в компонент 
-                stackPnl.Children.Add(img);
-                // запись компонента в кнопку 
-                ((Button)sender).Content = stackPnl;
+                // обновление статуса
+                fail = true;
 
+                // обновление изображения 
+                    // создание контейнера под картинку 
+                    Image img = new Image();
+                    // записть картинки 
+                    img.Source = mine;
+                    // создание компонента для отображения 
+                    StackPanel stackPnl = new StackPanel();
+                    // установка толщины границ компонента 
+                    stackPnl.Margin = new Thickness(0);
+                    // добавление контейнера с картинкой в компонент 
+                    stackPnl.Children.Add(img);
+                    // запись компонента в кнопку 
+                    ((Button)sender).Content = stackPnl;
+
+                //звук смерти 
+                death.Play();
+
+                //уведомление о инкубаторстве
                 MessageBox.Show("  !!!NOW YOU INCUBATOR!!! \n For retry press Start");
 
+                //открытие доступа к кнопке
+                Start_Cl.IsEnabled = true;
             }
             else
             {
@@ -541,11 +220,6 @@ namespace Minesweeper
                     stackPnl.Children.Add(img);
                     // запись компонента в кнопку 
                     ((Button)sender).Content = stackPnl;
-
-
-
-
-
                 }
                 else if (gen.getCell(i % N, i / N) == 1)
                 {
@@ -669,7 +343,22 @@ namespace Minesweeper
                 }
             }
 
+            // минус клетка 
+            ost -= 1;
+        
+            if (!fail && ost == count_mines)
+            {
+                MessageBox.Show("  !!!YOU WIN!!! \n For retry press Start");
 
+                //открытие доступа к кнопке
+                Start_Cl.IsEnabled = true;
+            }
+
+        }
+
+        private void volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            player.Volume = volume.Value;
         }
     }
 }

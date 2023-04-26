@@ -7,10 +7,10 @@ C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\D
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe.config
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.exe
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\bin\Debug\Minesweeper.pdb
-C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\MainWindow.baml
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.g.resources
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.Properties.Resources.resources
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.GenerateResource.cache
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.csproj.CoreCompileInputs.cache
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.exe
 C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\Minesweeper.pdb
+C:\Users\user\Desktop\HEI\Semestr_2\Informatics\C#\Minesweeper\Minesweeper\obj\Debug\MainWindow.baml

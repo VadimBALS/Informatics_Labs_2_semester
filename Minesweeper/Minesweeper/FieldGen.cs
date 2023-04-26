@@ -20,7 +20,7 @@ namespace Minesweeper
         int maxMines;
 
         // установка значений 
-        public FieldGen(int N, int difficulty)
+        public FieldGen(int difficulty)
         {
             if (difficulty == 0)
             {
@@ -28,7 +28,7 @@ namespace Minesweeper
                 field = new int[4, 4];
 
                 // установка кол-ва мин
-                maxMines = 4;
+                maxMines = 3;
             }
             if (difficulty == 1)
             {
@@ -36,15 +36,15 @@ namespace Minesweeper
                 field = new int[7, 7];
 
                 // установка кол-ва мин
-                maxMines = 18;
+                maxMines = 15;
             }
             if (difficulty == 2)
             {
                 // заполнение поля
-                field = new int[12, 12];
+                field = new int[11, 11];
 
                 // установка кол-ва мин
-                maxMines = 70;
+                maxMines = 50;
             }
         }
 
@@ -165,5 +165,6 @@ namespace Minesweeper
         {
             return field[i, j];
         }
+
     }
 }
