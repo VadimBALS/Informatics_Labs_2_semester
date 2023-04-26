@@ -22,7 +22,7 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
         // картинки 
-        BitmapImage mine  = new BitmapImage(new Uri(@"pack://application:,,,/img/facehugger.jpg", UriKind.Absolute));
+        BitmapImage mine  = new BitmapImage(new Uri(@"pack://application:,,,/img/mine.png", UriKind.Absolute));
         BitmapImage egg   = new BitmapImage(new Uri(@"pack://application:,,,/img/egg_pixelart.png", UriKind.Absolute));
         BitmapImage egg_0 = new BitmapImage(new Uri(@"pack://application:,,,/img/aliens_egg_0.png", UriKind.Absolute));
         BitmapImage egg_1 = new BitmapImage(new Uri(@"pack://application:,,,/img/aliens_egg_1.png", UriKind.Absolute));

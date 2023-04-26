@@ -128,5 +128,8 @@
   <ItemGroup>
     <None Include="music1\facehugger_man.wav" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\mine.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
