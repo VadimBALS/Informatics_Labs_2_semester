@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Minesweeper"
         mc:Ignorable="d"
-        Title="Alien Minesweeper" Height="500" Width="900" Background="Black">
-    <Grid>
+        Title="Alien Minesweeper" Height="606" Width="1100" Background="Black" Closed="Window_Closed">
+    <Grid Margin="0,0,0,-6" RenderTransformOrigin="0.637,0.504">
         <Grid.Background>
             <ImageBrush ImageSource="/wallpep_2.jpeg"/>
         </Grid.Background>
-        <UniformGrid x:Name="ugr" Rows="5" Columns="5" Margin="223,67,42,51"/>
-        <Label Name="RealCount" Content="Generated count mines" HorizontalAlignment="Left" Margin="23,218,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        <UniformGrid x:Name="ugr"/>
+        <Label Name="RealCount" Content="Generated count mines" HorizontalAlignment="Left" Margin="23,286,0,0" VerticalAlignment="Top" FontSize="22" Foreground="White"/>
         <Label Content="Alien Minesweeper" HorizontalAlignment="Center" Height="45" Margin="0,10,0,0" VerticalAlignment="Top" Width="210" Foreground="White" FontSize="24"/>
-        <Button x:Name="Start_Cl" Content="START" HorizontalAlignment="Left" Margin="13,165,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="26" Foreground="White" OpacityMask="#FF019483" Click="Start_Cl_Click">
+        <Button x:Name="Start_Cl" Content="START" HorizontalAlignment="Left" Margin="176,176,0,0" VerticalAlignment="Top" Width="100" Height="40" FontSize="26" Foreground="White" OpacityMask="#FF019483" Click="Start_Cl_Click">
             <Button.BorderBrush>
                 <ImageBrush/>
             </Button.BorderBrush>
@@ -21,9 +21,9 @@
                 <ImageBrush/>
             </Button.Background>
         </Button>
-        <ComboBox x:Name="dif_var" HorizontalAlignment="Left" Height="35" Margin="23,125,0,0" VerticalAlignment="Top" Width="80"/>
-        <Label Content="Difficulty" HorizontalAlignment="Left" Margin="23,67,0,0" VerticalAlignment="Top" Foreground="White" Width="135" Height="32" FontSize="18"/>
-        <Slider x:Name="volume" HorizontalAlignment="Left" Height="17" Margin="-9,306,0,0" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.5,0.5" Maximum="1" LargeChange="0" Value="0.3" ValueChanged="volume_ValueChanged">
+        <ComboBox x:Name="dif_var" HorizontalAlignment="Left" Height="35" Margin="23,109,0,0" VerticalAlignment="Top" Width="98" FontSize="22" SelectionChanged="dif_var_SelectionChanged"/>
+        <Label Content="Difficulty" HorizontalAlignment="Left" Margin="23,67,0,0" VerticalAlignment="Top" Foreground="White" Width="135" Height="37" FontSize="22"/>
+        <Slider x:Name="volume" HorizontalAlignment="Left" Height="16" Margin="249,392,0,0" VerticalAlignment="Top" Width="105" RenderTransformOrigin="0.5,0.5" Maximum="1" LargeChange="0" Value="0.1" ValueChanged="volume_ValueChanged">
             <Slider.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -33,6 +33,25 @@
                 </TransformGroup>
             </Slider.RenderTransform>
         </Slider>
-
+        <DataGrid x:Name="data_players" HorizontalAlignment="Left" Height="166" Margin="23,346,0,0" VerticalAlignment="Top" Width="240" Foreground="Black">
+            <DataGrid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF616161"/>
+                    <GradientStop Color="#FF8A8A8A" Offset="1"/>
+                </LinearGradientBrush>
+            </DataGrid.Background>
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding uid}" Header="Uid"/>
+                <DataGridTextColumn Binding="{Binding nickname}" Header="Nick" />
+                <DataGridTextColumn Binding="{Binding time}" Header="Time"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Nick" HorizontalAlignment="Left" Margin="158,67,0,0" VerticalAlignment="Top" Foreground="White" Width="135" Height="37" FontSize="22"/>
+        <TextBox x:Name="nicknm" HorizontalAlignment="Left" Height="35" Margin="152,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="141" FontSize="22" Text="noname"/>
+        <Label Content="Time:" HorizontalAlignment="Left" Margin="23,234,0,0" VerticalAlignment="Top" Foreground="White" Width="63" Height="37" FontSize="22"/>
+        <Label x:Name="time" Content="" HorizontalAlignment="Left" Margin="91,234,0,0" VerticalAlignment="Top" Foreground="White" Width="153" Height="37" FontSize="22"/>
+        <Label Content="N*M" HorizontalAlignment="Left" Margin="57,147,0,0" VerticalAlignment="Top" Foreground="White" Width="59" Height="37" FontSize="22"/>
+        <TextBox x:Name="V" HorizontalAlignment="Left" Height="35" Margin="23,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="22"/>
+        <TextBox x:Name="M" HorizontalAlignment="Left" Height="35" Margin="93,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" FontSize="22"/>
     </Grid>
 </Window>

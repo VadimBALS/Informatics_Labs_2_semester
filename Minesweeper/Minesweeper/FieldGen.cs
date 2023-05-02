@@ -36,7 +36,7 @@ namespace Minesweeper
                 field = new int[7, 7];
 
                 // установка кол-ва мин
-                maxMines = 15;
+                maxMines = 12;
             }
             if (difficulty == 2)
             {
@@ -44,8 +44,29 @@ namespace Minesweeper
                 field = new int[11, 11];
 
                 // установка кол-ва мин
-                maxMines = 50;
+                maxMines = 30;
             }
+        }
+
+        public FieldGen(int difficulty, int N, int M)
+        {
+            if (difficulty == 0)
+            {
+                // установка кол-ва мин
+                maxMines = (int)(N * M * 20 / 100);
+            }
+            if (difficulty == 1)
+            {
+                // установка кол-ва мин
+                maxMines = (int)(N * M * 25 / 100);
+            }
+            if (difficulty == 2)
+            {
+                // установка кол-ва мин
+                maxMines = (int)(N * M * 30 / 100);
+            }
+
+            field = new int[N, M];
         }
 
         // проверка на наличике мин вокруг ячейки 
